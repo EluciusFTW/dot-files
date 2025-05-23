@@ -1,0 +1,29 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+
+[character] 
+success_symbol = "[>>](bold green)" 
+
+[[battery.display]]
+threshold = 60
+discharging_symbol = "💀 "
+
+[time]
+disabled = false
+format = '[$time ](bold green)'
+utc_time_offset = "+2"
+
+[git_branch]
+symbol = "🌱 "
+
+[git_metrics]
+disabled = false
+added_style = "bold blue"
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+[git_status]
+disabled = false
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"

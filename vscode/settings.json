@@ -1,0 +1,59 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.startupEditor": "welcomePage",
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "vsicons.projectDetection.autoReload": true,
+    "explorer.confirmDelete": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "files.associations": {
+        "*.svg": "xml"
+    },
+    "vsicons.dontShowNewVersionMessage": true,
+    "FSharp.suggestGitignore": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.openRepositoryInParentFolders": "never",
+    "githubPullRequests.createOnPublishBranch": "never",
+    "gitlens.graph.minimap.additionalTypes": [
+        "tags"
+    ],
+    "search.exclude": {
+        "**/*.code-search": false
+    },
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "workbench.editorAssociations": {
+        "git-rebase-todo": "default"
+    },
+    "window.zoomLevel": 1,
+    "window.commandCenter": false,
+    "gitlens.graph.minimap.enabled": false,
+    "workbench.colorTheme": "Atom One Dark",
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "workbench.preferredDarkColorTheme": "Atom One Dark",
+    "workbench.settings.applyToAllProfiles": [
+
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#000000",
+        "activityBar.foreground": "#c678dd",
+        "activityBarBadge.background": "#00bdb1",
+        "editor.background": "#000000",
+        "tab.activeBackground": "#00bdb1",
+        "statusBar.background": "#000000",
+        "panel.background": "#000000",
+        "scrollbarSlider.background": "#c678dd",
+        "sideBar.foreground": "#c678dd",
+        "sideBar.background":"#000000",
+        "sideBar.border": "#c678dd",
+        "button.background": "#00bdb1",
+        "badge.background": "#00bdb1",
+        "sideBarSectionHeader.background": "#000000",
+        "titleBar.activeBackground": "#000000",
+        
+    },
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "workbench.editor.showTabs": "single"
+}
