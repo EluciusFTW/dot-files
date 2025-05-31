@@ -199,13 +199,17 @@ let default_theme = {
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
   show_banner: false
+  buffer_editor: "hx"
   color_config: $default_theme
-  use_grid_icons: true
   float_precision: 2
   # buffer_editor: "emacs" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
   use_ansi_coloring: true
   edit_mode: emacs # emacs, vi
-  shell_integration: true,
+  shell_integration: {
+    osc2: true
+    osc7: true
+    osc8: true   
+  }
   ls: {
     use_ls_colors: true
   }
@@ -231,10 +235,8 @@ $env.config = {
     }
   }
   filesize: {
-    metric: false
-    format: "auto" 
+    unit: metric
   }
-
   hooks: {
     pre_prompt: []
     pre_execution: []
@@ -434,7 +436,7 @@ $env.config = {
   ]
 }
 
-$env.EDITOR = hx
+$env.EDITOR = "hx"
 
 def --env ya [...args] {
 	let tmp = (mktemp -t "yazi-cwd.XXXXX")
