@@ -1,0 +1,17 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+
+-- vim.keymap.set(
+--   "n", 
+--   "<leader>e", 
+--   function() 
+--     local neotree = require("neo-tree.command")
+--     local winid = vim.fn.bufwinid("Neo-tree filesystem [left]")
+--     if winid ~= -1 then
+--       vim.api.nvim_set_current_win(winid)
+--     else
+--       neotree.execute({ toggle = false, dir = vim.loop.cwd() })
+--     end
+--   end, 
+--   { desc = "Focus Neo-tree" })
