@@ -4,5 +4,8 @@ return {
     opts = {
       inlay_hints = { enabled = false },
     },
+    servers = {
+      markdownlint = false,
+    },
   },
 }
