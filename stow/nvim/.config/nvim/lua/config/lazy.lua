@@ -51,28 +51,3 @@ require("lazy").setup({
     },
   },
 })
-
-local mode_bg = {
-  n = "#1e1e2e",
-  i = "#003f3f",
-  v = "#3f003f",
-  V = "#3f003f",
-  [""] = "#3f003f",
-  c = "#3f1f00",
-  R = "#3f0000",
-}
-
-local function update_mode_bg()
-  local mode = vim.api.nvim_get_mode().mode
-  local bg = mode_bg[mode] or "#1e1e2e"
-  vim.api.nvim_set_hl(0, "Normal", { bg = bg })
-end
-
-vim.api.nvim_create_augroup("ModeBackground", { clear = true })
-
-vim.api.nvim_create_autocmd({ "ModeChanged", "BufEnter", "InsertEnter", "InsertLeave" }, {
-  group = "ModeBackground",
-  callback = update_mode_bg,
-})
-
-update_mode_bg()
