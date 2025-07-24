@@ -4,8 +4,14 @@ return {
     opts = {
       inlay_hints = { enabled = false },
     },
-    servers = {
-      markdownlint = false,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        markdown = {},
+      },
     },
   },
 }
