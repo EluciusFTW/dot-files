@@ -3,9 +3,9 @@
 -- Add any additional keymaps here
 
 -- vim.keymap.set(
---   "n", 
---   "<leader>e", 
---   function() 
+--   "n",
+--   "<leader>e",
+--   function()
 --     local neotree = require("neo-tree.command")
 --     local winid = vim.fn.bufwinid("Neo-tree filesystem [left]")
 --     if winid ~= -1 then
@@ -13,5 +13,6 @@
 --     else
 --       neotree.execute({ toggle = false, dir = vim.loop.cwd() })
 --     end
---   end, 
+--   end,
 --   { desc = "Focus Neo-tree" })
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
