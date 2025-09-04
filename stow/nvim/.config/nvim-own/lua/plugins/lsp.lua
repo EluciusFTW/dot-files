@@ -44,13 +44,13 @@ return {
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition') --  To jump back, press <C-t>.
-          map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
-          map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
-          map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+          map('grr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
+          map('gri', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
+          map('grd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition') --  To jump back, press <C-t>.
+          map('gO', require('fzf-lua').lsp_document_symbols, 'Open Document Symbols')
+          map('gW', require('fzf-lua').lsp_workspace_symbols, 'Open Workspace Symbols')
+          map('grt', require('fzf-lua').lsp_typedefs, '[G]oto [T]ype Definition')
+          map('grD', require('fzf-lua').lsp_declarations, '[G]oto [D]eclaration')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -161,7 +161,13 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
+        -- roslyn_ls = {
+        --   cmd = { 'Microsoft.CodeAnalysis.LanguageServer' },
+        --   filetypes = { 'cs', 'fs', 'fsx' },
+        --   root_dir = function(fname)
+        --     return require('lspconfig.util').root_pattern('*.sln', '*.csproj', '*.fsproj', '.git')(fname)
+        --   end,
+        -- },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -172,7 +178,10 @@ return {
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                globals = { 'vim', 'require' },
+                -- disable = { 'missing-fields' },
+              },
             },
           },
         },
@@ -212,5 +221,22 @@ return {
         },
       }
     end,
+  },
+  {
+    'seblyng/roslyn.nvim',
+    ---@module 'roslyn.config'
+    ---@type RoslynNvimConfig
+    config = function()
+      require('mason').setup {
+        registries = {
+          'github:mason-org/mason-registry',
+          'github:Crashdummyy/mason-registry',
+        },
+      }
+      require('roslyn').setup {}
+    end,
+    opts = {
+      -- your configuration comes here; leave empty for default settings
+    },
   },
 }
