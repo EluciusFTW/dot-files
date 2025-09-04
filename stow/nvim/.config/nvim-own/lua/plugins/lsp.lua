@@ -183,6 +183,13 @@ return {
                 -- disable = { 'missing-fields' },
               },
             },
+            angularls = {},
+            typescript = {
+              inlayHints = {
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+              },
+            },
           },
         },
       }
