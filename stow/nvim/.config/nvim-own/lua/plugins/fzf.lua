@@ -12,6 +12,7 @@ return {
     vim.keymap.set('n', '<leader>fl', require('fzf-lua').loclist, { desc = '[F]ind [L]ocation' })
     vim.keymap.set('n', '<leader>ff', require('fzf-lua').files, { desc = '[F]ind [F]iles' })
     vim.keymap.set('n', '<leader>fg', require('fzf-lua').live_grep, { desc = '[F]ind [G]rep' })
+    vim.keymap.set('n', '<leader>\\', require('fzf-lua').live_grep, { desc = 'Global Grep' })
     vim.keymap.set('n', '<leader>fw', require('fzf-lua').grep_cword, { desc = '[F]ind current [W]ord' })
     vim.keymap.set('n', '<leader>fj', require('fzf-lua').jumps, { desc = '[F]ind [J]umps' })
     vim.keymap.set('n', '<leader>/', require('fzf-lua').lgrep_curbuf, { desc = 'Fuzzy-find in current buffer' })
