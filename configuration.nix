@@ -83,6 +83,10 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  
+  environment.sessionVariables = {
+    NVIM_APPNAME="nvim-own";
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -91,6 +95,7 @@
     fuzzel
     git
     git-credential-manager
+    lazygit
     helix
     hyprlock
     kitty
@@ -98,10 +103,21 @@
     neovim
     nushell
     starship
+    stow
     vivaldi
     vscode
     waybar
     wget
+    zoxide
+    ripgrep
+    fd
+    fzf
+    unzip
+    curl
+    gcc
+    gnumake
+    lua
+    wl-clipboard
   ];
 
   fonts.packages = with pkgs; [
@@ -113,6 +129,9 @@
     powerline-symbols
     # (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; }
   ];
+  fonts.fontconfig = {
+    antialias = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
