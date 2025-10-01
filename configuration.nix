@@ -32,11 +32,18 @@
   xdg.portal.wlr.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   security.sudo.wheelNeedsPassword = false;
-  services.greetd.enable = true;
-  services.greetd.settings.default_session = {
-    command = "Hyprland";
-    user = "eluciusftw";
-  };
+#services.greetd = { 
+#    enable = true;
+ #   settings = {
+  #    default_session = {
+   #     command = "${pkgs.hyprland}/bin/Hyprland";
+    #  };
+     # initial_session = {
+      #  command = "${pkgs.greetd.gtkgreet}/bin/gtkgreet"; 
+#	user = "greeter";
+ #     };
+  #  };
+  #};
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -81,6 +88,14 @@
     packages = with pkgs; [];
   };
 
+#  users.users.greeter = {
+ #   isSystemUser = true;
+  #  description = "Greetd user";
+   # home = "/var/lib/greeter";
+    #createHome = true;
+  #extraGroups = [ "video" "input" ];
+#  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
@@ -96,8 +111,8 @@
     git
     git-credential-manager
     lazygit
-    helix
     hyprlock
+    hyprpicker
     kitty
     fastfetch
     neovim
