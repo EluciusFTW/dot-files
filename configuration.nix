@@ -19,6 +19,8 @@
   # Tinkering
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.hyprland.enable = true;
+
+  # git
   programs.git = {
     enable = true;
     config = {
@@ -27,37 +29,34 @@
       credential.helper = "manager";
     };
   };
+
   services.dbus.enable = true;
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   security.sudo.wheelNeedsPassword = false;
-#services.greetd = { 
-#    enable = true;
- #   settings = {
-  #    default_session = {
-   #     command = "${pkgs.hyprland}/bin/Hyprland";
-    #  };
-     # initial_session = {
-      #  command = "${pkgs.greetd.gtkgreet}/bin/gtkgreet"; 
-#	user = "greeter";
- #     };
-  #  };
-  #};
+  security.rtkit.enable = true;
 
+  # Sound
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = false;  # needed for 32-bit apps like Steam
+    pulse.enable = true;
+    jack.enable = false;
+  };
+  hardware.pulseaudio.enable = false;
+  
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "eftw-surfy"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -84,17 +83,9 @@
   users.users.eluciusftw = {
     isNormalUser = true;
     description = "Guy Buss";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = with pkgs; [];
   };
-
-#  users.users.greeter = {
- #   isSystemUser = true;
-  #  description = "Greetd user";
-   # home = "/var/lib/greeter";
-    #createHome = true;
-  #extraGroups = [ "video" "input" ];
-#  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -133,6 +124,7 @@
     gnumake
     lua
     wl-clipboard
+    pavucontrol
   ];
 
   fonts.packages = with pkgs; [
