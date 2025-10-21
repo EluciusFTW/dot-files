@@ -14,6 +14,7 @@ return {
   { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
   { 'datsfilipe/vesper.nvim' },
   { 'kdheepak/monochrome.nvim' },
+  { 'rebelot/kanagawa.nvim' },
   {
     'mcauley-penney/techbase.nvim',
     priority = 1000,
