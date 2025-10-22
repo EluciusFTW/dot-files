@@ -1,9 +1,6 @@
 return {
   'ibhagwan/fzf-lua',
-  -- optional for icon support
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  -- or if using mini.icons/mini.nvim
-  -- dependencies = { "echasnovski/mini.icons" },
+  dependencies = { 'echasnovski/mini.icons' },
   opts = {},
   config = function()
     vim.keymap.set('n', '<leader>fG', require('fzf-lua').global, { desc = '[F]ind [G]lobally' })
