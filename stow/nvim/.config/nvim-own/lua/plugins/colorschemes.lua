@@ -14,18 +14,11 @@ return {
   { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
   { 'datsfilipe/vesper.nvim' },
   { 'kdheepak/monochrome.nvim' },
-  { 'rebelot/kanagawa.nvim' },
   {
-    'mcauley-penney/techbase.nvim',
-    priority = 1000,
+    'rebelot/kanagawa.nvim',
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      -- require('techbase').setup {
-      --   styles = {
-      --     comments = { italic = true }, -- Disable italics in comments
-      --   },
-      -- }
-      vim.cmd.colorscheme 'techbase'
+      vim.cmd.colorscheme 'kanagawa'
     end,
   },
+  { 'mcauley-penney/techbase.nvim' },
 }
