@@ -25,6 +25,10 @@ return {
           include = { 'csharp', 'html', 'angular' },
         }
 
+        require("luasnip.loaders.from_lua").lazy_load({
+          paths = vim.fn.stdpath("config") .. "/lua/snippets"
+        })
+
         local ls = require 'luasnip'
         ls.filetype_extend('typescript', { 'angular' })
         ls.filetype_extend('html', { 'angular' })
