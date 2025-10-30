@@ -23,7 +23,26 @@ return { -- Collection of various small independent plugins/modules
     --  and try some other statusline plugin
     local statusline = require 'mini.statusline'
     -- set use_icons to true if you have a Nerd Font
-    statusline.setup { use_icons = vim.g.have_nerd_font }
+    statusline.setup {
+      use_icons = vim.g.have_nerd_font,
+      content = {
+        active = function()
+          local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+          local filename = vim.fn.expand '%:t' -- just the file name
+          local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 1 }
+          local location = MiniStatusline.section_location { trunc_width = 75 }
+
+          -- Compose your custom statusline
+          return MiniStatusline.combine_groups {
+            { hl = mode_hl, strings = { mode } },
+            { hl = 'MiniStatuslineFilename', strings = { filename } },
+            '%=', -- End left alignment
+            { hl = 'MiniStatuslineFileinfo', strings = { vim.bo.filetype } },
+            { hl = 'MiniStatuslineLocation', strings = { location } },
+          }
+        end,
+      },
+    }
 
     -- You can configure sections in the statusline by overriding their
     -- default behavior. For example, here we set the section for
