@@ -43,7 +43,7 @@ return {
           end
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          map('gra', require('fzf-lua').lsp_code_actions, '[G]oto Code [A]ction', { 'n', 'x' })
           map('grr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
           map('gri', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
           map('grd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition') --  To jump back, press <C-t>.
