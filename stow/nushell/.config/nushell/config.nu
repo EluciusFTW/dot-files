@@ -436,7 +436,10 @@ $env.config = {
   ]
 }
 
-$env.EDITOR = "hx"
+$env.EDITOR = "nvim"
+# For angularls plugin to work with never TypeScript versions
+$env.NG_TECH_PREVIEW = "1"
+$env.NVIM_APPNAME = "nvim-own"
 
 def --env ya [...args] {
 	let tmp = (mktemp -t "yazi-cwd.XXXXX")
