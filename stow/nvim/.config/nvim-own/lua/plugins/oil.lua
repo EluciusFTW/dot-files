@@ -24,7 +24,7 @@ return {
     },
     {
       '<leader>e',
-      '<cmd>Oil --float<CR>',
+      '<cmd>Oil<CR>',
       desc = 'Open Oil file explorer',
     },
   },
