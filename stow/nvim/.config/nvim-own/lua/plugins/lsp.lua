@@ -46,7 +46,7 @@ return {
           map('gra', require('fzf-lua').lsp_code_actions, '[G]oto Code [A]ction', { 'n', 'x' })
           map('grr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
           map('gri', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
-          map('grd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition') --  To jump back, press <C-t>.
+          map('grd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition')
           map('gO', require('fzf-lua').lsp_document_symbols, 'Open Document Symbols')
           map('gW', require('fzf-lua').lsp_workspace_symbols, 'Open Workspace Symbols')
           map('grt', require('fzf-lua').lsp_typedefs, '[G]oto [T]ype Definition')
@@ -55,7 +55,7 @@ return {
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
-          ---@param bufnr? integer some lsp support methods only in specific files
+          ---@param bufnr? integer
           ---@return boolean
           local function client_supports_method(client, method, bufnr)
             if vim.fn.has 'nvim-0.11' == 1 then
