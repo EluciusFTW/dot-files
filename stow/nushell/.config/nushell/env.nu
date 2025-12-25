@@ -37,5 +37,13 @@ $env.NU_PLUGIN_DIRS = [
 #mkdir ~/.cache/starship
 #starship init nu | save ~/.cache/starship/init.nu
 
-#mkdir ~/.cache/zoxide
-#zoxide init nushell | save ~/.cache/zoxide/.zoxide.nu
+let zoxide_cache = ($nu.home-path | path join ".cache/zoxide")
+let zoxide_file = ($zoxide_cache | path join ".zoxide.nu")
+
+if not ($zoxide_cache | path exists) {
+    mkdir $zoxide_cache
+}
+
+if not ($zoxide_file | path exists) {
+    zoxide init nushell | save $zoxide_file
+}
