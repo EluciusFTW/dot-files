@@ -1,0 +1,40 @@
+# ~/.shellrc
+
+# Editors
+export EDITOR="nvim"
+export NVIM_APPNAME="nvim-own"
+
+# Aliases
+alias ls="ls -A --color=auto"
+alias ll="ls -la --color=auto"
+alias nixc="sudoedit /etc/nixos/configuration.nix"
+alias nixr="sudo nixos-rebuild switch"
+alias png="ping www.google.com"
+alias fd="fdfind"
+alias df="cd ~/sources/dot-files/"
+
+alias qws='git status'
+
+qwl() {
+  local amount="${1:-10}"
+  local COLOR_AUTHOR="\e[36m"  # cyan
+  local COLOR_RESET="\e[0m"
+
+  git --no-pager log \
+    -n "$amount" \
+    --date=short \
+    --pretty=format:'%h|%an|%s|%ad' \
+  | while IFS="|" read -r hash author subject date; do
+      # Truncate subject
+      if [ ${#subject} -gt 60 ]; then
+        subject="${subject:0:57}..."
+      fi
+
+      # Print with color for the author field
+      printf "%-10s ${COLOR_AUTHOR}%-25s${COLOR_RESET} %-60s %s\n" \
+        "$hash" "$author" "$subject" "$date"
+    done
+}
+
+# Rust
+. "$HOME/.cargo/env"
