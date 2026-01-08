@@ -48,6 +48,13 @@ return {
       desc = '[F]ind last picker and [R]esume',
     },
     {
+      '<leader>fR',
+      function()
+        require('fzf-lua').registers()
+      end,
+      desc = '[F]ind [R]egisters',
+    },
+    {
       '<leader>fp',
       function()
         require('fzf-lua').builtin()
