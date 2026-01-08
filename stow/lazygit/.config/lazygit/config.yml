@@ -18,3 +18,54 @@ gui:
       - "#89b4fa" # Blue
     unstagedChangesColor:
       - red       # Red
+
+customCommands:
+  - key: 'E'
+    description: 'EWK: Create branch'
+    context: 'localBranches'
+    prompts:
+      - type: 'menu'
+        title: 'What kind of branch?'
+        key: 'BranchType'
+        options:
+          - name: 'feature'
+            description: 'a feature branch'
+            value: 'feature'
+          - name: 'fix'
+            description: 'a bugfix branch'
+            value: 'fix'
+          - name: 'maintenance'
+            description: 'a branch for maintenance work'
+            value: 'maintenance'
+          - name: 'technical'
+            description: 'a branch for technical work'
+            value: 'technical'
+          - name: 'experimental'
+            description: 'a branch for experimental work'
+            value: 'experimental'
+      - type: 'input'
+        title: 'Ticket number?'
+        key: 'TicketNumber'
+        initialValue: ''
+      - type: 'input'
+        title: 'Branch name?'
+        key: 'BranchName'
+        initialValue: ''
+    command: "git checkout -b {{.Form.BranchType}}/EWK-{{.Form.TicketNumber}}-{{.Form.BranchName}}"
+    loadingText: 'Creating branch'
+  - key: 'E'
+    description: 'EWK: Create commit'
+    context: 'files'
+    prompts:
+      - type: 'input'
+        title: 'Commit description'
+        key: 'Description'
+        initialValue: ''
+    command: |
+      #!/bin/bash
+      BRANCH={{.SelectedLocalBranch.Name}}
+      TICKET=$(echo "$BRANCH" | grep -oP 'EWK-\d+' || echo "NONE")
+      MESSAGE=$([ "$TICKET" != "NONE" ] && echo "(#$TICKET) - {{.Form.Description}}" || echo "{{.Form.Description}}")
+      git commit -m "$MESSAGE"
+    loadingText: 'Creating commit'
+    output: popup
