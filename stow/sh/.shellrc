@@ -12,6 +12,7 @@ alias nixr="sudo nixos-rebuild switch"
 alias png="ping www.google.com"
 alias fd="fdfind"
 alias df="cd ~/sources/dot-files/"
+alias nvimc="cd ~/sources/dot-files/stow/nvim/.config/nvim-own/ && nvim ."
 
 alias qws='git status'
 
