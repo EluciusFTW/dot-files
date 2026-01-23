@@ -44,14 +44,19 @@ customCommands:
             description: 'a branch for experimental work'
             value: 'experimental'
       - type: 'input'
-        title: 'Ticket number?'
+        title: 'Ticket number (leave empty if there is no ticket)?'
         key: 'TicketNumber'
         initialValue: ''
       - type: 'input'
         title: 'Branch name?'
         key: 'BranchName'
         initialValue: ''
-    command: "git checkout -b {{.Form.BranchType}}/EWK-{{.Form.TicketNumber}}-{{.Form.BranchName}}"
+    command: >
+      git checkout -b {{.Form.BranchType}}/
+      {{- if .Form.TicketNumber -}}
+        EWK-{{.Form.TicketNumber}}-
+      {{- end -}}
+      {{.Form.BranchName}}
     loadingText: 'Creating branch'
   - key: 'E'
     description: 'EWK: Create commit'
