@@ -3,17 +3,30 @@ return {
   dependencies = { 'echasnovski/mini.icons' },
   opts = {
     files = {
-      formatter = 'path.filename_first', -- places file name first
+      formatter = 'path.filename_first',
     },
   },
   config = function()
+    local actions = require 'fzf-lua.actions'
     require('fzf-lua').setup {
       defaults = {
-        formatter = 'path.filename_first', -- places file name first
+        formatter = 'path.filename_first',
       },
       winopts = {
         preview = {
           layout = 'vertical',
+        },
+      },
+      actions = {
+        files = {
+          ['enter'] = actions.file_edit,
+          ['ctrl-q'] = actions.file_sel_to_qf,
+          ['alt-q'] = actions.file_all_to_qf,
+        },
+        grep = {
+          ['enter'] = actions.file_edit,
+          ['ctrl-q'] = actions.file_sel_to_qf,
+          ['alt-q'] = actions.file_all_to_qf,
         },
       },
     }
