@@ -179,5 +179,12 @@ return {
       end,
       desc = '[G]it [S]tatus',
     },
+    {
+      '<leader>gca',
+      function()
+        require('fzf-lua').lsp_code_actions()
+      end,
+      desc = '[G]oto [C]ode [A]ctions',
+    },
   },
 }
