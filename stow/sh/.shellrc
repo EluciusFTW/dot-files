@@ -4,6 +4,10 @@
 export EDITOR="nvim"
 export NVIM_APPNAME="nvim-own"
 
+# Node.js support
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+
 # Aliases
 alias ls="ls -A --color=auto"
 alias ll="ls -la --color=auto"
@@ -13,6 +17,8 @@ alias png="ping www.google.com"
 alias fd="fdfind"
 alias df="cd ~/sources/dot-files/"
 alias nvimc="cd ~/sources/dot-files/stow/nvim/.config/nvim-own/ && nvim ."
+alias azl="az acr login --name acracaewkfsharedsrv"
+alias lg="lazygit"
 
 alias qws='git status'
 

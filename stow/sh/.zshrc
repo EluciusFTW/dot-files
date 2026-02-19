@@ -1,9 +1,6 @@
 # Set up the prompt
 [ -f ~/.shellrc ] && source ~/.shellrc
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-
 setopt histignorealldups sharehistory
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
