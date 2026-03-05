@@ -43,5 +43,28 @@ qwl() {
     done
 }
 
+jnv() {
+  local file
+  local preview_cmd
+
+  if command -v batcat >/dev/null 2>&1; then
+    preview_cmd="batcat --style=numbers --color=always --line-range :500 {} 2>/dev/null"
+  else
+    preview_cmd="cat {} 2>/dev/null"
+  fi
+
+  if command -v fdfind >/dev/null 2>&1; then
+    file=$(fdfind --type f --hidden --exclude .git | fzf --preview "$preview_cmd")
+  elif command -v fd >/dev/null 2>&1; then
+    file=$(fd --type f --hidden --exclude .git | fzf --preview "$preview_cmd")
+  else
+    file=$(find . -type f -not -path '/\.git/' 2>/dev/null | fzf --preview "$preview_cmd")
+  fi
+
+  if [[ -n "$file" ]]; then
+    nvim "$file"
+  fi
+}
+
 # Rust
 . "$HOME/.cargo/env"
