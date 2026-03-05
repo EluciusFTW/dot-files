@@ -25,9 +25,9 @@ return {
           include = { 'csharp', 'html', 'angular' },
         }
 
-        require("luasnip.loaders.from_lua").lazy_load({
-          paths = vim.fn.stdpath("config") .. "/lua/snippets"
-        })
+        require('luasnip.loaders.from_lua').lazy_load {
+          paths = vim.fn.stdpath 'config' .. '/lua/snippets',
+        }
 
         local ls = require 'luasnip'
         ls.filetype_extend('typescript', { 'angular' })
@@ -83,9 +83,14 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'lazydev', 'dadbod' },
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        dadbod = {
+          name = 'Dadbod',
+          module = 'vim_dadbod_completion.blink',
+          filetype = { 'sql', 'plsql' },
+        },
       },
     },
 
