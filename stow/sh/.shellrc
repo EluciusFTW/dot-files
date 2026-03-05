@@ -19,6 +19,7 @@ alias df="cd ~/sources/dot-files/"
 alias nvimc="cd ~/sources/dot-files/stow/nvim/.config/nvim-own/ && nvim ."
 alias azl="az acr login --name acracaewkfsharedsrv"
 alias lg="lazygit"
+alias ld="lazydocker"
 
 alias qws='git status'
 
