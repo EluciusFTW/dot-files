@@ -10,20 +10,38 @@ return {
     },
   },
   {
-    -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      -- Mason must be loaded before its dependents so we need to set it up here.
-      -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'mason-org/mason.nvim', opts = {} },
+      {
+        'mason-org/mason.nvim',
+        opts = {
+          registries = {
+            'github:mason-org/mason-registry',
+            'github:Crashdummyy/mason-registry',
+          },
+          ensure_installed = {
+            'lua-language-server',
+            'xmlformatter',
+            'csharpier',
+            'prettier',
+            'stylua',
+            -- 'bicep-lsp',
+            'html-lsp',
+            'css-lsp',
+            'eslint-lsp',
+            -- 'typescript-language-server',
+            'json-lsp',
+            --'rust-analyzer',
+            -- !
+            'roslyn',
+            -- "csharp-language-server",
+            -- "omnisharp",
+          },
+        },
+      },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-      -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
     },
     config = function()
@@ -152,6 +170,20 @@ return {
         --     functionLikeReturnTypes = { enabled = true },
         --   },
         -- },
+        fsautocomplete = {
+          cmd = { 'fsautocomplete', '--adaptive-lsp-server-enabled' },
+          filetypes = { 'fsharp' },
+          root_markers = { '*.sln', '*.fsproj', '.git' },
+          settings = {
+            FSharp = {
+              keywordsAutocomplete = true,
+              Linter = true,
+              UnionCaseStubGeneration = true,
+              RecordStubGeneration = true,
+              InterfaceStubGeneration = true,
+            },
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
