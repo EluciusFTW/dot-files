@@ -145,6 +145,13 @@ return {
       desc = '[F]ind [K]eymaps',
     },
     {
+      '<leader>fs',
+      function()
+        require('fzf-lua').lsp_document_symbols()
+      end,
+      desc = '[F]ind [S]ymbols in File',
+    },
+    {
       '<leader>fd',
       function()
         require('fzf-lua').diagnostics_document()
