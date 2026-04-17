@@ -11,7 +11,6 @@ return {
     --   vim.cmd.colorscheme 'tokyonight-night'
     -- end,
   },
-  { 'eemed/sitruuna.vim' },
   { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
   { 'datsfilipe/vesper.nvim' },
   { 'kdheepak/monochrome.nvim' },
