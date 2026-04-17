@@ -25,17 +25,12 @@ return {
             'csharpier',
             'prettier',
             'stylua',
-            -- 'bicep-lsp',
             'html-lsp',
             'css-lsp',
             'eslint-lsp',
             -- 'typescript-language-server',
             'json-lsp',
-            --'rust-analyzer',
-            -- !
             'roslyn',
-            -- "csharp-language-server",
-            -- "omnisharp",
           },
         },
       },
@@ -45,13 +40,6 @@ return {
       'saghen/blink.cmp',
     },
     config = function()
-      -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-      -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-      --  This function gets run when an LSP attaches to a particular buffer.
-      --    That is to say, every time a new file is opened that is associated with
-      --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-      --    function will be executed to configure the current buffer
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -70,25 +58,16 @@ return {
           map('grt', require('fzf-lua').lsp_typedefs, '[G]oto [T]ype Definition')
           map('grD', require('fzf-lua').lsp_declarations, '[G]oto [D]eclaration')
 
-          -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-          ---@param client vim.lsp.Client
-          ---@param method vim.lsp.protocol.Method
-          ---@param bufnr? integer
-          ---@return boolean
+          -- Remove this wrapper method
           local function client_supports_method(client, method, bufnr)
-            if vim.fn.has 'nvim-0.11' == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
+            return client:supports_method(method, bufnr)
           end
 
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client then
+            client.server_capabilities.codeLensProvider = nil
+            client.server_capabilities.foldingRangeProvider = nil
+          end
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -152,24 +131,8 @@ return {
       }
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
         angularls = {},
-        -- ts_ls = {},
         vtsls = {},
-        -- typescript = {
-        --   inlayHints = {
-        --     propertyDeclarationTypes = { enabled = true },
-        --     functionLikeReturnTypes = { enabled = true },
-        --   },
-        -- },
         fsautocomplete = {
           cmd = { 'fsautocomplete', '--adaptive-lsp-server-enabled' },
           filetypes = { 'fsharp' },
@@ -185,9 +148,6 @@ return {
           },
         },
         lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
           settings = {
             Lua = {
               runtime = { version = 'LuaJIT' },
@@ -218,20 +178,5 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     end,
-  },
-  {
-    'seblyng/roslyn.nvim',
-    ---@module 'roslyn.config'
-    ---@type RoslynNvimConfig
-    config = function()
-      require('mason').setup {
-        registries = {
-          'github:mason-org/mason-registry',
-          'github:Crashdummyy/mason-registry',
-        },
-      }
-      require('roslyn').setup {}
-    end,
-    opts = {},
   },
 }
