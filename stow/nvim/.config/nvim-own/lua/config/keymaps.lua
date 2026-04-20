@@ -21,8 +21,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
--- binding to dump all messages in a scratch buffer
-vim.keymap.set('n', '<leader>E', function()
+-- dump all messages in a scratch buffer
+vim.keymap.set('n', '<leader>dm', function()
   -- create a new scratch buffer
   local buf = vim.api.nvim_create_buf(false, true) -- listed=false, scratch=true
   local messages = vim.split(vim.fn.execute 'messages', '\n')
@@ -36,3 +36,6 @@ vim.keymap.set('n', '<leader>E', function()
 
   vim.api.nvim_set_current_buf(buf)
 end)
+
+-- switch working dir to that of the current file
+vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', { silent = true })
