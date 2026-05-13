@@ -12,4 +12,6 @@
   boot.loader.grub.device = "/dev/vda";
 
   networking.hostName = "eftw-vm";
+  services.spice-vdagentd.enable = true;
+  services.qemuGuest.enable = true
 }
