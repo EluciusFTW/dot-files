@@ -8,9 +8,8 @@
     ../../modules/development.nix
   ];
 
-  # Legacy BIOS bootloader — set device to your VM's primary disk (e.g. "/dev/sda")
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.device = "/dev/vda";
 
   networking.hostName = "eftw-vm";
 }
