@@ -31,6 +31,7 @@
     vivaldi
     vscode
     waybar
+    wezterm
     wl-clipboard
   ];
 }
