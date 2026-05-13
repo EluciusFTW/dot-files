@@ -23,10 +23,11 @@
   console.keyMap = "de";
 
   users.users.eluciusftw = {
-    isNormalUser = true;
-    description  = "Guy Buss";
-    extraGroups  = [ "networkmanager" "wheel" "audio" ];
-    packages     = with pkgs; [];
+    isNormalUser    = true;
+    description     = "Guy Buss";
+    extraGroups     = [ "networkmanager" "wheel" "audio" ];
+    packages        = with pkgs; [];
+    initialPassword = "changeme";
   };
 
   nixpkgs.config.allowUnfree = true;
