@@ -120,9 +120,14 @@ return {
         angularls = {},
         vtsls = {},
         fsautocomplete = {
-          cmd = { 'fsautocomplete', '--adaptive-lsp-server-enabled' },
+          cmd = { 'fsautocomplete' },
           filetypes = { 'fsharp' },
-          root_markers = { '*.sln', '*.fsproj', '.git' },
+          init_options = {
+            AutomaticWorkspaceInit = true,
+            UnusedOpensAnalyzer = false, -- <-- moved here
+            UnusedDeclarationsAnalyzer = false, -- <-- move
+            SimplifyNameAnalyzer = false,
+          },
           settings = {
             FSharp = {
               keywordsAutocomplete = true,
@@ -130,8 +135,19 @@ return {
               UnionCaseStubGeneration = true,
               RecordStubGeneration = true,
               InterfaceStubGeneration = true,
+              UnusedOpensAnalyzer = false, -- <-- moved here
+              UnusedDeclarationsAnalyzer = false, -- <-- move
+              SimplifyNameAnalyzer = false,
             },
           },
+          root_dir = function(bufnr, on_dir)
+            local fname = vim.api.nvim_buf_get_name(bufnr)
+            if fname:match '%.fsx$' then
+              on_dir(vim.fn.fnamemodify(fname, ':h'))
+            else
+              on_dir(vim.fs.root(bufnr, { '*.sln', '*.fsproj', '.git' }))
+            end
+          end,
         },
         lua_ls = {
           settings = {
