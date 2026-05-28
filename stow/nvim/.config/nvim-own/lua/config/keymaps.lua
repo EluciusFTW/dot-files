@@ -39,3 +39,22 @@ end)
 
 -- switch working dir to that of the current file
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', { silent = true })
+
+vim.keymap.set('n', '<leader>dd', function()
+  local diags = vim.diagnostic.get(0, { lnum = vim.fn.line '.' - 1 })
+  if not diags[1] then
+    return
+  end
+
+  local buf = vim.api.nvim_create_buf(false, true) -- scratch buffer
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, { diags[1].message })
+  vim.api.nvim_open_win(buf, true, {
+    relative = 'cursor',
+    row = 1,
+    col = 0,
+    width = 80,
+    height = 5,
+    style = 'minimal',
+    border = 'rounded',
+  })
+end, { desc = 'Open diagnostic in scratch buffer' })
