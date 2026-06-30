@@ -61,6 +61,12 @@ return {
           if client then
             client.server_capabilities.codeLensProvider = nil
             client.server_capabilities.foldingRangeProvider = nil
+            -- fsautocomplete emits out-of-range semantic-token deltas that
+            -- freeze Neovim's token highlighter on open; treesitter still
+            -- handles F# highlighting, so just drop semantic tokens for it.
+            if client.name == 'fsautocomplete' then
+              client.server_capabilities.semanticTokensProvider = nil
+            end
           end
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
