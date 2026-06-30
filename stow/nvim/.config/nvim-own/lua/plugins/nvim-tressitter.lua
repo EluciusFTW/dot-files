@@ -23,17 +23,51 @@ return {
         'vimdoc',
       }
 
-      -- The module system (highlight/indent) is gone in the main branch; enable
-      -- them per-buffer via a FileType autocmd instead.
+      -- The module system (highlight / indent / auto_install) is gone in the
+      -- main branch; do it per-buffer via a FileType autocmd. This also replaces
+      -- the old `auto_install = true`: installing a parser is what links its
+      -- highlight queries onto the runtimepath, so for any available-but-not-yet
+      -- installed language we install it first and enable highlighting once it
+      -- is ready. Without this, parsers load but have no queries -> no captures
+      -- (e.g. comments and keywords end up the same colour).
+      local ts = require 'nvim-treesitter'
+      local ts_config = require 'nvim-treesitter.config'
+      local ts_parsers = require 'nvim-treesitter.parsers'
+
+      local function enable(buf)
+        if not vim.api.nvim_buf_is_valid(buf) then
+          return
+        end
+        -- highlight (no-op + silent if anything goes wrong)
+        if not pcall(vim.treesitter.start, buf) then
+          return
+        end
+        -- indent (experimental in the main branch, but matches the old behaviour)
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+
       vim.api.nvim_create_autocmd('FileType', {
         group = vim.api.nvim_create_augroup('treesitter-enable', { clear = true }),
         callback = function(args)
-          -- highlight (no-op + silent if no parser is available)
-          if not pcall(vim.treesitter.start, args.buf) then
+          local ft = vim.bo[args.buf].filetype
+          if ft == '' then
             return
           end
-          -- indent (experimental in the main branch, but matches the old behaviour)
-          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          local lang = vim.treesitter.language.get_lang(ft) or ft
+          -- only languages nvim-treesitter actually ships a parser for
+          if not ts_parsers[lang] then
+            return
+          end
+          if vim.tbl_contains(ts_config.get_installed(), lang) then
+            enable(args.buf)
+          else
+            -- async install of parser + queries, then enable when ready
+            ts.install(lang):await(vim.schedule_wrap(function(err)
+              if not err then
+                enable(args.buf)
+              end
+            end))
+          end
         end,
       })
 
