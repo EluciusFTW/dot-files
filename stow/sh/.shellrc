@@ -8,6 +8,8 @@ export NVIM_APPNAME="nvim-own"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Aliases
 alias ls="ls -A --color=auto"
 alias ll="ls -la --color=auto"
@@ -17,11 +19,14 @@ alias png="ping www.google.com"
 alias fd="fdfind"
 alias df="cd ~/sources/dot-files/"
 alias nvimc="cd ~/sources/dot-files/stow/nvim/.config/nvim-own/ && nvim ."
-alias azl="az acr login --name acracaewkfsharedsrv"
 alias lg="lazygit"
 alias ld="lazydocker"
+alias tg="tuigether"
 
 alias qws='git status'
+
+alias azl="az acr login --name acracaewkfsharedsrv"
+alias azpr="az repos pr list --query \"[].{ID:pullRequestId, Title:title, Author:createdBy.displayName, Target:targetRefName, Status:status}\" -o table"
 
 qwl() {
   local amount="${1:-10}"

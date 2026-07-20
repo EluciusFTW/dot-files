@@ -32,3 +32,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh)"
