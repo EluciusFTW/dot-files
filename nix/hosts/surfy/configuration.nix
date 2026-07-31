@@ -12,7 +12,11 @@
   hardware.firmware = [ pkgs.linux-firmware ];
   hardware.enableRedistributableFirmware = true;
 
-  boot.loader.systemd-boot.enable      = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    editor = false;
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "eftw-surfy";

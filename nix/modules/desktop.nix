@@ -2,6 +2,7 @@
 
 {
   programs.hyprland.enable = true;
+  programs.hyprlock.enable = true;
 
   services.dbus.enable = true;
 
@@ -18,11 +19,10 @@
     pulse.enable     = true;
     jack.enable      = false;
   };
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   environment.systemPackages = with pkgs; [
     fuzzel
-    hyprlock
     hyprpicker
     kitty
     nushell
