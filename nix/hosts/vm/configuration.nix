@@ -13,5 +13,5 @@
 
   networking.hostName = "eftw-vm";
   services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true
+  services.qemuGuest.enable = true;
 }
