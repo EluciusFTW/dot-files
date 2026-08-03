@@ -2,12 +2,13 @@
 
 {
   environment.systemPackages = with pkgs; [
-    dotnet-sdk_9
+    dotnet-sdk_10
     gcc
     git-credential-manager
     gnumake
     lazygit
     lua
     neovim
+    claude-code
   ];
 }
