@@ -29,6 +29,20 @@
       credential.helper = "manager";
     };
   };
+ 
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        command = "Hyprland";
+        user = "eluciusftw";
+      };
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
 
   services.dbus.enable = true;
   xdg.portal.enable = true;
