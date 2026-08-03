@@ -15,9 +15,17 @@
   boot.loader.systemd-boot = {
     enable = true;
     editor = false;
+    configurationLimit = 5;
   };
 
   boot.loader.efi.canTouchEfiVariables = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+  nix.settings.auto-optimise-store = true;
 
   networking.hostName = "eftw-surfy";
 }
