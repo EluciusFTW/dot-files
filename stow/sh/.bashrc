@@ -4,7 +4,13 @@
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 
-. "$HOME/.atuin/bin/env"
+# atuin -----------------------------------------------------------
+[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 
-[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
-eval "$(atuin init bash)"
+if [[ -f ~/.bash-preexec.sh ]]; then
+  source ~/.bash-preexec.sh
+elif [[ -f /run/current-system/sw/share/bash/bash-preexec.sh ]]; then
+  source /run/current-system/sw/share/bash/bash-preexec.sh
+fi
+
+command -v atuin >/dev/null && eval "$(atuin init bash --disable-up-arrow)"

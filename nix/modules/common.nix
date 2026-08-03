@@ -48,6 +48,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    bash-preexec
     curl
     fastfetch
     fd
