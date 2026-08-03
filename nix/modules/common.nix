@@ -57,6 +57,7 @@
     stow
     unzip
     wget
+    atuin
     zoxide
   ];
 
