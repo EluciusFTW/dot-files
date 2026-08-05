@@ -4,6 +4,20 @@
   programs.hyprland.enable = true;
   programs.hyprlock.enable = true;
 
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        command = "start-hyprland";
+        user = "eluciusftw";
+      };
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
   services.dbus.enable = true;
 
   xdg.portal.enable       = true;
