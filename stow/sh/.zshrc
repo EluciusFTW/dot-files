@@ -32,6 +32,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(wtp shell-init zsh)"
 
 . "$HOME/.atuin/bin/env"
-eval "$(atuin init zsh)"
+command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
