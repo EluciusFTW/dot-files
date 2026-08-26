@@ -19,18 +19,6 @@ return {
             'github:mason-org/mason-registry',
             'github:Crashdummyy/mason-registry',
           },
-          ensure_installed = {
-            'lua-language-server',
-            'xmlformatter',
-            'csharpier',
-            'prettier',
-            'stylua',
-            'html-lsp',
-            'css-lsp',
-            'eslint-lsp',
-            'json-lsp',
-            'roslyn',
-          },
         },
       },
       'mason-org/mason-lspconfig.nvim',
@@ -59,7 +47,6 @@ return {
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client then
-            client.server_capabilities.codeLensProvider = nil
             client.server_capabilities.foldingRangeProvider = nil
             -- fsautocomplete emits out-of-range semantic-token deltas that
             -- freeze Neovim's token highlighter on open; treesitter still
@@ -89,14 +76,6 @@ return {
                 vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
               end,
             })
-          end
-
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
           end
         end,
       })
@@ -179,6 +158,9 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua',
         'tree-sitter-cli', -- required by nvim-treesitter (main branch) to build parsers
+        -- formatters used by conform.nvim
+        'csharpier',
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     end,

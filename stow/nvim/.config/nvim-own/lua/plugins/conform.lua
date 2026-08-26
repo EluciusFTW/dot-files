@@ -22,20 +22,27 @@ return { -- Autoformat
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
       else
+        -- csharpier and roslyn regularly need more than conform's 500ms
+        -- default on large files, and a timed-out format fails silently.
         return {
-          timeout_ms = 500,
+          timeout_ms = 3000,
           lsp_format = 'fallback',
         }
       end
     end,
     formatters_by_ft = {
-      json = { 'prettier' },
       lua = { 'stylua' },
-      -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
-      --
-      -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      cs = { 'csharpier' },
+      typescript = { 'prettier' },
+      javascript = { 'prettier' },
+      html = { 'prettier' },
+      htmlangular = { 'prettier' },
+      css = { 'prettier' },
+      scss = { 'prettier' },
+      markdown = { 'prettier' },
+      json = { 'prettier' },
+      jsonc = { 'prettier' },
+      yaml = { 'prettier' },
     },
   },
 }
