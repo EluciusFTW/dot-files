@@ -10,6 +10,10 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# .NET global tools (dotnet-easydotnet, fsautocomplete, ...). easy-dotnet.nvim
+# spawns roslyn via `dotnet-easydotnet`, so without this nvim finds no C# LSP.
+export PATH="$HOME/.dotnet/tools:$PATH"
+
 # Aliases
 alias ls="ls -A --color=auto"
 alias ll="ls -la --color=auto"
