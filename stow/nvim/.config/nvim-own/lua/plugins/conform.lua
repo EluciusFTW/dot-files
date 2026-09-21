@@ -1,4 +1,4 @@
-return { -- Autoformat
+return {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo' },
@@ -30,6 +30,11 @@ return { -- Autoformat
         }
       end
     end,
+    formatters = {
+      prettier = {
+        prepend_args = { '--single-quote' },
+      },
+    },
     formatters_by_ft = {
       lua = { 'stylua' },
       cs = { 'csharpier' },

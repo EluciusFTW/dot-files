@@ -7,7 +7,11 @@ return {
       '<cmd>DiffviewOpen<CR> main',
       desc = 'Open Diffview',
     },
-    { '<leader>gm', '<cmd>DiffviewOpen main<CR>', desc = 'Open Diffview vs main' },
+    {
+      '<leader>gm',
+      '<cmd>DiffviewOpen main<CR>',
+      desc = 'Open Diffview vs main',
+    },
   },
   opts = {
     keymaps = {
