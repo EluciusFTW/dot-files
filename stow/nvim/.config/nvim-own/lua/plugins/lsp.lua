@@ -146,7 +146,13 @@ return {
         },
       }
 
-      for server_name, server_config in pairs(servers) do
+      local external_servers = {
+        racket_langserver = {
+          filetypes = { 'racket', 'scheme', 'forge' },
+        },
+      }
+
+      for server_name, server_config in pairs(vim.tbl_extend('error', {}, servers, external_servers)) do
         server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
         vim.lsp.enable(server_name)
         if server_config then
