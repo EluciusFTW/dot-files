@@ -26,6 +26,7 @@ alias nvimc="cd ~/sources/dot-files/stow/nvim/.config/nvim-own/ && nvim ."
 alias lg="lazygit"
 alias ld="lazydocker"
 alias tg="tuigether"
+alias ts="tuisweeper"
 
 alias qws='git status'
 
